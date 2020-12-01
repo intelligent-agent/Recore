@@ -1,5 +1,7 @@
 {
     "Model": "Recore",
     "Revision": "A4",
-    "SerialNumber": "0009"
+    "SerialNumber": "0009",
+    "Voltages": {},
+    "Opamps": {}
 }
