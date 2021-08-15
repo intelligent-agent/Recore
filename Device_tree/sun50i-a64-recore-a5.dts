@@ -1,0 +1,9 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+
+/dts-v1/;
+
+#include "sun50i-a64-recore.dtsi"
+
+/ {
+	model = "Recore-A5";
+};
