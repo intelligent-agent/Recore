@@ -8,4 +8,7 @@ fel-windows:
 	.\sunxi-tools\sunxi-fel.exe -v -p spl binaries\sunxi-spl.bin write 0x44000 binaries\bl31.bin write 0x4a000000 binaries\u-boot-${rev}.bin reset64 0x44000
 
 tty:
-	minicom -D /dev/ttyUSB0 -w
+	screen /dev/ttyUSB0 115200
+
+acm:
+	screen /dev/ttyACM0 115200
