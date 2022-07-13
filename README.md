@@ -14,7 +14,7 @@ USB drive insered. This method bypasses the eMMC completely.
 The three files
 - sunxi-spl.bin
 - bl31.bin
-- u-boot-a5.bin
+- u-boot.bin
 
 are used to boot a board in FEL mode. See Makefile
 for instructions to use those for a specific revision.
