@@ -4,7 +4,7 @@ Repository for Recore 3D printer control board
 ## What is in here?
 - Schematics
 - 3D models of the board
-- Device tree binaries and sources
+- Device tree sources
 - Special binaries for booting the board in FEL mode
 - Calibration and testing data from the manufacturing process.
 
