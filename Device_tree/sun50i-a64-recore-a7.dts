@@ -1,0 +1,191 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+
+/dts-v1/;
+
+#include "sun50i-a64-recore.dtsi"
+#include <dt-bindings/usb/pd.h>
+
+/ {
+	model = "Recore-A7";
+	compatible = "iagent,recore-a6", "allwinner,sun50i-a64";
+
+	reg_usb0_vbus: usb0-vbus {
+		compatible = "regulator-fixed";
+		regulator-name = "usb0-vbus0";
+		regulator-type = "voltage";
+		gpio = <&pio 3 7 GPIO_ACTIVE_HIGH>; // PD7
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		enable-active-high;
+		status = "okay";
+	};
+
+};
+
+&pio{
+	reg_usb1_vbus3_pins: reg-usb1-vbus3-pins {
+		pins = "PD6";
+		function = "reg_usb1_vbus3";
+	};
+	reg_usb1_vbus4_pins: reg-usb1-vbus4-pins {
+		pins = "PD5";
+		function = "reg_usb1_vbus4";
+	};
+};
+
+&reg_usb1_vbus3 {
+	gpio = <&pio 3 5 GPIO_ACTIVE_HIGH> ; /* PD5 */
+};
+
+&reg_usb1_vbus4 {
+	gpio = <&pio 3 6 GPIO_ACTIVE_HIGH> ; /* PD6 */
+};
+
+&reg_aldo1 {
+	regulator-always-on;
+	regulator-min-microvolt = <3300000>;
+	regulator-max-microvolt = <3300000>;
+	regulator-name = "vcc-ext";
+};
+
+
+/* Set over current to lowest value: 35 A = 700 mV */
+&reg_dldo2 {
+	regulator-min-microvolt = <700000>;
+	regulator-max-microvolt = <700000>;
+};
+
+&reg_aldo2 {
+	status = "disabled";
+};
+
+&reg_dldo3 {
+	status = "disabled";
+};
+
+&reg_dldo4 {
+	status = "disabled";
+};
+
+&r_pio {
+	fusb302x {
+		fusb0_int_pin: fusb0-int-pin {
+			pins = "PE6";
+			function = "gpio_in";
+		};
+	};
+};
+
+&i2c1 {
+	status = "okay";
+
+	fusb0: fusb30x@22 {
+		compatible = "fcs,fusb302";
+		reg = <0x22>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&fusb0_int_pin>;
+		vbus-supply = <&reg_usb0_vbus>;
+		interrupt-parent = <&r_pio>;
+		interrupts = <4 6 IRQ_TYPE_EDGE_FALLING>; // PE6
+
+		port {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			/*usb_hs: endpoint@0 {
+				reg = <0>;
+				remote-endpoint = <&usb0_hs>;
+			};*/
+		};
+
+		usb_con: connector {
+			compatible = "usb-c-connector";
+			data-role = "dual";
+			label = "USB-C";
+			op-sink-microwatt = <2500000>;
+			power-role = "dual";
+			sink-pdos =	<PDO_FIXED(5000, 1000, PDO_FIXED_USB_COMM)>;
+			source-pdos =	<PDO_FIXED(5000, 1000, PDO_FIXED_USB_COMM)>;
+			try-power-role = "sink";
+
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				/*port@0 {
+					reg = <0>;
+					fusb302_ep: endpoint {
+						remote-endpoint = <&usb0_role_switch>;
+					};
+				};*/
+			};
+		};
+	};
+};
+
+/*&spi1{
+	status = "okay";
+
+	mcp2515can: can@0 {
+		compatible = "microchip,mcp2515";
+		reg = <0>;
+		spi-max-frequency = <1000000>;
+		clock-frequency = <8000000>;
+		interrupt-parent = <&r_pio>;
+		interrupts = <0 11 IRQ_TYPE_EDGE_FALLING>;
+	};
+
+	spidev@0 {
+		compatible = "armbian,spi-dev";
+		spi-max-frequency = <1000000>;
+		reg = <0>;
+	};
+};*/
+
+&uart3 {
+	status = "disabled";
+};
+
+&uart4 {
+	status = "disabled";
+};
+
+/*&usb_otg {
+	dr_mode = "device";
+	status = "okay";
+};*/
+
+/*&reg_drivevbus {
+	regulator-name = "usb0-vbus";
+	status = "okay";
+};*/
+
+/*&usb_power_supply {
+	status = "okay";
+};*/
+
+
+&usbphy {
+	/*usb0_vbus_power-supply = <&usb_power_supply>;*/
+	/*usb0_vbus-supply = <&reg_drivevbus>;*/
+	/*usb0_vbus-supply = <&reg_usb0_vbus>;*/
+	/*usb0_vbus_det-gpios = <&pio 7 5 (GPIO_ACTIVE_HIGH)>;*/
+	usb0_id_det-gpios   = <&pio 4 7 GPIO_ACTIVE_LOW>;
+	status = "okay";
+	/*port {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		usb0_role_switch: endpoint@0 {
+			reg = <0>;
+			remote-endpoint = <&fusb302_ep>;
+		};
+	};*/
+};
+
+
+&ehci0 {
+	/*port {
+		usb0_hs: endpoint {
+			remote-endpoint = <&usb_hs>;
+		};
+	};*/
+};

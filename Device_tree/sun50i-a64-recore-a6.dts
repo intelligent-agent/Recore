@@ -27,3 +27,11 @@ status = "disabled";
 &reg_dldo4 {
 	status = "disabled";
 };
+
+&uart2 {
+	status = "disabled";
+};
+
+&uart3 {
+	status = "disabled";
+};
