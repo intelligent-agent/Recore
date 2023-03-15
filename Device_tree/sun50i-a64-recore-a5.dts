@@ -6,4 +6,57 @@
 
 / {
 	model = "Recore-A5";
+	compatible = "iagent,recore-a5", "allwinner,sun50i-a64";
+
+	e0-consumer {
+		compatible = "custom,reg-userspace-consumer";
+		regulator-name = "e0-consumer";
+		controlled-supply = <&reg_aldo1>;
+	};
+
+	e1-consumer {
+		compatible = "custom,reg-userspace-consumer";
+		regulator-name = "e1-consumer";
+		controlled-supply = <&reg_aldo2>;
+	};
+
+	e2-consumer {
+		compatible = "custom,reg-userspace-consumer";
+		regulator-name = "e2-consumer";
+		controlled-supply = <&reg_dldo3>;
+	};
+
+	e3-consumer {
+		compatible = "custom,reg-userspace-consumer";
+		regulator-name = "e3-consumer";
+		controlled-supply = <&reg_dldo4>;
+	};
+};
+
+&reg_aldo1 {
+	/delete-property/ regulator-always-on;
+	regulator-min-microvolt = <700000>;
+	regulator-max-microvolt = <700000>;
+	regulator-name = "vcc-vref-e0";
+};
+
+&reg_aldo2 {
+	/delete-property/ regulator-always-on;
+	regulator-min-microvolt = <700000>;
+	regulator-max-microvolt = <700000>;
+	regulator-name = "vcc-vref-e1";
+};
+
+&reg_dldo3 {
+	/delete-property/ regulator-always-on;
+	regulator-min-microvolt = <700000>;
+	regulator-max-microvolt = <700000>;
+	regulator-name = "vcc-vref-e2";
+};
+
+&reg_dldo4 {
+  /delete-property/ regulator-always-on;
+  regulator-min-microvolt = <700000>;
+  regulator-max-microvolt = <700000>;
+  regulator-name = "vcc-vref-e3";
 };

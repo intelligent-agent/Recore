@@ -6,4 +6,5 @@
 
 / {
 	model = "Recore-A4";
+	compatible = "iagent,recore-a4", "allwinner,sun50i-a64";
 };
