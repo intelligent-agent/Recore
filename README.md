@@ -19,6 +19,9 @@ The three files
 are used to boot a board in FEL mode. See Makefile
 for instructions to use those for a specific revision.
 
+The file `configs/recore_fel_config` is used to compile the new u-boot binaries, 
+it is based on u-boot-v2022.07. 
+
 ## Sources
 The binaries are identical to the what is used in Refactor distro,
 the source code is available here:  
@@ -45,5 +48,6 @@ a USB device on the host computer:
 should show:  
 `Allwinner Technology sunxi SoC OTG connector in FEL/flashing mode`
 
-Then use the Makfile to run:  
+Then use the Makefile to run:  
 `make fel`
+
