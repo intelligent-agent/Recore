@@ -1,4 +1,4 @@
-Test starting 2024-04-25 19:42:51.803109
+Test starting 2024-04-25 19:50:52.542083
 Testing board
 Board voltage           [    OK   ]
 Current                 [    OK   ]
