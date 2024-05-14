@@ -2,11 +2,11 @@
 Repository for Recore 3D printer control board
 
 ## What is in here?
-- Schematics
-- 3D models of the board
+- Schematics for Recore etc.
+- 3D models of Recore
 - Device tree sources
 - Special binaries for booting the board in FEL mode
-- Calibration and testing data from the manufacturing process.
+- Calibration and testing data from the manufacturing process
 
 ## Note about binaries
 There are binaries for booting the board in FEL mode with a
@@ -23,7 +23,7 @@ The file `configs/recore_fel_config` is used to compile the new u-boot binaries,
 it is based on u-boot-v2022.07. 
 
 ## Sources
-The binaries are identical to the what is used in Refactor distro,
+The binaries are identical to the what is used in Refactor/Rebuild distro,
 the source code is available here:  
 https://github.com/intelligent-agent/u-boot and  
 https://github.com/intelligent-agent/arm-trusted-firmware  
@@ -32,14 +32,21 @@ The only differece is the boot command. In the stock image:
 in the FEL binaries:   
 `run bootcmd_usb0`
 
-## Prerequisites for booting in FEL mode
-On a Linux computer, in the folder with this README:
+## Installing the sunxi-tools package. 
+In order to boot the board from FEL-mode, the program `sunxi-fel` must be available. 
+In recent versions of Debian (Bookworm and later) and derivatives, this can be installed from apt. 
+```
+sudo apt install sunxi-tools
+```
+On older versions of Debian, the sunxi-tools package does not have support for Allwinner A64. 
+If that is the case, the program can be downloaded and installed with these instructions:
 ```
 git clone https://github.com/linux-sunxi/sunxi-tools
 cd sunxi-tools
 make
-cd ..
+sudo make install
 ```
+
 ## Starting the board in FEL-mode
 Hold down the button marked `fel` while applying power.
 The PMIC/power LED should come on. The board must be connected to a host computer through the USB C connector. When the board is in FEL-mode, it should show up as
