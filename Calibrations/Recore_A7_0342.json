@@ -1,7 +1,7 @@
 {
     "Model": "Recore",
     "Revision": "A7",
-    "SerialNumber": "0341",
+    "SerialNumber": "0342",
     "Voltages": {
         "GND BOARD": "-0.0000",
         "12V JIG": "11.9084",
